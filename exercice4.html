@@ -1,0 +1,125 @@
+<html>
+
+<head>
+    <title>Exercice 4 JS</title>
+    <script>
+
+        //validation name
+        function validationN(name) {
+            if (name == "") {
+                alert('le champ name est obligatoire');
+                return false;
+            }
+            return true;
+        }
+
+        //validation Statut
+        function validationSC(statut) {
+            for (i in statut) {
+                if (statut[i].checked) {
+                    return true;
+                }
+            }
+            alert('le champ statut est obligatoire');
+            return false;
+        }
+
+        //validation Langues
+        function validationL(lang) {
+
+            for (i in lang) {
+                if (lang[i].checked) {
+                    return true;
+                }
+            }
+            alert('le champ langues est obligatoire');
+            return false;
+        }
+
+        //	validation nationnalité
+        function validationNat(nat) {
+
+            if (nat[0].value != "*") {
+                return true;
+            }
+            alert('le champ nat est obligatoire');
+            return false;
+        }
+
+        //validation Mail
+        function validationMail(mail) {
+            //email = login@domaine.ext
+            pos1 = mail.indexOf('@');
+            login = mail.substring(0, pos1); //[0, pos1[
+            pos2 = mail.lastIndexOf('.');
+            domaine = mail.substring(pos1 + 1, pos2);
+            extension = mail.substring(pos2 + 1, mail.length);
+
+            //login
+            if (login.length < 2) {
+                alert('login min 2 ');
+                return false;
+            }
+
+            //domaine
+            if (domaine.length < 2) {
+                alert('domaine min 2');
+                return false;
+            }
+
+            //ext
+            if (extension.length < 2 || extension.length > 3) {
+                alert('extension 2 ou 3');
+                return false;
+            }
+            return true;
+
+        }
+
+
+        //validation finale
+        function validation(name, statut, lang, nat, email) {
+            return validationN(name) && validationSC(statut)
+                && validationL(lang) && validationNat(nat)
+                && validationMail(mail);
+        }
+
+    </script>
+</head>
+
+<body>
+    <form onsubmit="validation(document.getElementById('nom').value,
+		document.getElementsByName('s'), 
+		document.getElementsByName('l'),
+		document.getElementsByName('nat'),
+		document.getElementById('m').value)">
+        Nom : <input id="nom">
+        <br>
+        Statut Civil:
+        <input type="radio" name="s"> Célibataire
+        <input type="radio" name="s"> Marié
+        <input type="radio" name="s"> Divorcé
+        <input type="radio" name="s"> Veuf
+        <br>
+        Langues maitrisées :
+        <input type="checkbox" name="l"> Arabe
+        <input type="checkbox" name="l"> Français
+        <input type="checkbox" name="l"> Anglais
+        <br>
+        Sélectionnez votre nationnalité :
+        <select name="nat">
+            <option value="*">
+            <option value="tun"> Tun
+            <option value="fr"> Fr
+        </select>
+        <br>
+        Adresse Mail :
+        <input type="email" id="m">
+        <br>
+        <input type="submit">
+        <input type="reset">
+
+    </form>
+</body>
+
+</html>
